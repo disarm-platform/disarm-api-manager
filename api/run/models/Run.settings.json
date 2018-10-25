@@ -9,5 +9,14 @@
     "timestamps": true
   },
   "attributes": {
+    "run_status": {
+      "default": "",
+      "type": "enumeration",
+      "enum": [
+        "start",
+        "success",
+        "fail"
+      ]
+    },
   }
 }
