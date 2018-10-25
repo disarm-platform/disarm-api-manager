@@ -1,6 +1,6 @@
 {
   "connection": "default",
-  "collectionName": "",
+  "collectionName": "algorelease",
   "info": {
     "name": "algoRelease",
     "description": ""
@@ -28,6 +28,10 @@
     "algo": {
       "model": "algo",
       "via": "algoReleases"
+    },
+    "runs": {
+      "collection": "run",
+      "via": "algoRelease"
     }
   }
 }

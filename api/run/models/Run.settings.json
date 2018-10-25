@@ -22,6 +22,10 @@
       "model": "user",
       "via": "runs",
       "plugin": "users-permissions"
+    },
+    "algoRelease": {
+      "model": "algorelease",
+      "via": "runs"
     }
   }
 }
