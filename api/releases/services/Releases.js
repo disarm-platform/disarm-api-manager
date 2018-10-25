@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Algorelease.js service
+ * Releases.js service
  *
  * @description: A set of functions similar to controller's actions to avoid code duplication.
  */
@@ -12,21 +12,21 @@ const _ = require('lodash');
 module.exports = {
 
   /**
-   * Promise to fetch all algoreleases.
+   * Promise to fetch all releases.
    *
    * @return {Promise}
    */
 
   fetchAll: (params) => {
     // Convert `params` object to filters compatible with Mongo.
-    const filters = strapi.utils.models.convertParams('algorelease', params);
+    const filters = strapi.utils.models.convertParams('releases', params);
     // Select field to populate.
-    const populate = Algorelease.associations
+    const populate = Releases.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
-    return Algorelease
+    return Releases
       .find()
       .where(filters.where)
       .sort(filters.sort)
@@ -36,90 +36,90 @@ module.exports = {
   },
 
   /**
-   * Promise to fetch a/an algorelease.
+   * Promise to fetch a/an releases.
    *
    * @return {Promise}
    */
 
   fetch: (params) => {
     // Select field to populate.
-    const populate = Algorelease.associations
+    const populate = Releases.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
-    return Algorelease
-      .findOne(_.pick(params, _.keys(Algorelease.schema.paths)))
+    return Releases
+      .findOne(_.pick(params, _.keys(Releases.schema.paths)))
       .populate(populate);
   },
 
   /**
-   * Promise to count algoreleases.
+   * Promise to count releases.
    *
    * @return {Promise}
    */
 
   count: (params) => {
     // Convert `params` object to filters compatible with Mongo.
-    const filters = strapi.utils.models.convertParams('algorelease', params);
+    const filters = strapi.utils.models.convertParams('releases', params);
 
-    return Algorelease
+    return Releases
       .count()
       .where(filters.where);
   },
 
   /**
-   * Promise to add a/an algorelease.
+   * Promise to add a/an releases.
    *
    * @return {Promise}
    */
 
   add: async (values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Algorelease.associations.map(ast => ast.alias));
-    const data = _.omit(values, Algorelease.associations.map(ast => ast.alias));
+    const relations = _.pick(values, Releases.associations.map(ast => ast.alias));
+    const data = _.omit(values, Releases.associations.map(ast => ast.alias));
 
     // Create entry with no-relational data.
-    const entry = await Algorelease.create(data);
+    const entry = await Releases.create(data);
 
     // Create relational data and return the entry.
-    return Algorelease.updateRelations({ _id: entry.id, values: relations });
+    return Releases.updateRelations({ _id: entry.id, values: relations });
   },
 
   /**
-   * Promise to edit a/an algorelease.
+   * Promise to edit a/an releases.
    *
    * @return {Promise}
    */
 
   edit: async (params, values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Algorelease.associations.map(a => a.alias));
-    const data = _.omit(values, Algorelease.associations.map(a => a.alias));
+    const relations = _.pick(values, Releases.associations.map(a => a.alias));
+    const data = _.omit(values, Releases.associations.map(a => a.alias));
 
     // Update entry with no-relational data.
-    const entry = await Algorelease.update(params, data, { multi: true });
+    const entry = await Releases.update(params, data, { multi: true });
 
     // Update relational data and return the entry.
-    return Algorelease.updateRelations(Object.assign(params, { values: relations }));
+    return Releases.updateRelations(Object.assign(params, { values: relations }));
   },
 
   /**
-   * Promise to remove a/an algorelease.
+   * Promise to remove a/an releases.
    *
    * @return {Promise}
    */
 
   remove: async params => {
     // Select field to populate.
-    const populate = Algorelease.associations
+    const populate = Releases.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
     // Note: To get the full response of Mongo, use the `remove()` method
     // or add spent the parameter `{ passRawResult: true }` as second argument.
-    const data = await Algorelease
+    const data = await Releases
       .findOneAndRemove(params, {})
       .populate(populate);
 
@@ -128,7 +128,7 @@ module.exports = {
     }
 
     await Promise.all(
-      Algorelease.associations.map(async association => {
+      Releases.associations.map(async association => {
         const search = _.endsWith(association.nature, 'One') || association.nature === 'oneToMany' ? { [association.via]: data._id } : { [association.via]: { $in: [data._id] } };
         const update = _.endsWith(association.nature, 'One') || association.nature === 'oneToMany' ? { [association.via]: null } : { $pull: { [association.via]: data._id } };
 
@@ -145,22 +145,22 @@ module.exports = {
   },
 
   /**
-   * Promise to search a/an algorelease.
+   * Promise to search a/an releases.
    *
    * @return {Promise}
    */
 
   search: async (params) => {
     // Convert `params` object to filters compatible with Mongo.
-    const filters = strapi.utils.models.convertParams('algorelease', params);
+    const filters = strapi.utils.models.convertParams('releases', params);
     // Select field to populate.
-    const populate = Algorelease.associations
+    const populate = Releases.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
-    const $or = Object.keys(Algorelease.attributes).reduce((acc, curr) => {
-      switch (Algorelease.attributes[curr].type) {
+    const $or = Object.keys(Releases.attributes).reduce((acc, curr) => {
+      switch (Releases.attributes[curr].type) {
         case 'integer':
         case 'float':
         case 'decimal':
@@ -184,7 +184,7 @@ module.exports = {
       }
     }, []);
 
-    return Algorelease
+    return Releases
       .find({ $or })
       .sort(filters.sort)
       .skip(filters.start)

@@ -1,9 +1,9 @@
 {
   "connection": "default",
-  "collectionName": "algorelease",
+  "collectionName": "releases",
   "info": {
-    "name": "algoRelease",
-    "description": ""
+    "name": "releases",
+    "description": "Release of an algo, function, model, etc..."
   },
   "options": {
     "timestamps": true
@@ -27,11 +27,11 @@
     },
     "algo": {
       "model": "algo",
-      "via": "algoReleases"
+      "via": "releases"
     },
     "runs": {
       "collection": "run",
-      "via": "algoRelease"
+      "via": "releases"
     }
   }
 }

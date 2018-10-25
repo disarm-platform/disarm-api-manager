@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Lifecycle callbacks for the `Algorelease` model.
+ * Lifecycle callbacks for the `Releases` model.
  */
 
 module.exports = {

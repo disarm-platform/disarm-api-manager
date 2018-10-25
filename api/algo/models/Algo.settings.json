@@ -13,9 +13,10 @@
       "default": "",
       "type": "string"
     },
-    "algoReleases": {
-      "collection": "algorelease",
-      "via": "algo"
+    "releases": {
+      "collection": "releases",
+      "via": "algo",
+      "columnName": ""
     }
   }
 }
