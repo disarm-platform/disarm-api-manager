@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/algos",
+      "handler": "Algo.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/algos/count",
+      "handler": "Algo.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/algos/:_id",
+      "handler": "Algo.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/algos",
+      "handler": "Algo.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/algos/:_id",
+      "handler": "Algo.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/algos/:_id",
+      "handler": "Algo.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

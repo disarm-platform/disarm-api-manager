@@ -1,0 +1,33 @@
+{
+  "connection": "default",
+  "collectionName": "",
+  "info": {
+    "name": "algoRelease",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "version": {
+      "default": "",
+      "type": "string"
+    },
+    "container_link": {
+      "default": "",
+      "type": "string"
+    },
+    "docs_link": {
+      "default": "",
+      "type": "string"
+    },
+    "published": {
+      "default": false,
+      "type": "boolean"
+    },
+    "algo": {
+      "model": "algo",
+      "via": "algoReleases"
+    }
+  }
+}

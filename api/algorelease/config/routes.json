@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/algoreleases",
+      "handler": "Algorelease.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/algoreleases/count",
+      "handler": "Algorelease.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/algoreleases/:_id",
+      "handler": "Algorelease.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/algoreleases",
+      "handler": "Algorelease.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/algoreleases/:_id",
+      "handler": "Algorelease.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/algoreleases/:_id",
+      "handler": "Algorelease.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

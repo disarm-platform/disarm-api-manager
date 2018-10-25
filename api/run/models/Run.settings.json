@@ -1,0 +1,13 @@
+{
+  "connection": "default",
+  "collectionName": "run",
+  "info": {
+    "name": "run",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+  }
+}

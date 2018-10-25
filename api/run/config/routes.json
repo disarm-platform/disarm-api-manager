@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/runs",
+      "handler": "Run.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/runs/count",
+      "handler": "Run.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/runs/:_id",
+      "handler": "Run.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/runs",
+      "handler": "Run.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/runs/:_id",
+      "handler": "Run.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/runs/:_id",
+      "handler": "Run.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
