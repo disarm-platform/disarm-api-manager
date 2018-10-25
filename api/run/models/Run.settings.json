@@ -18,5 +18,10 @@
         "fail"
       ]
     },
+    "user": {
+      "model": "user",
+      "via": "runs",
+      "plugin": "users-permissions"
+    }
   }
 }

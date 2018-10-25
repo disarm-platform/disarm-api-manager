@@ -44,6 +44,10 @@
       "via": "users",
       "plugin": "users-permissions",
       "configurable": false
+    },
+    "runs": {
+      "collection": "run",
+      "via": "user"
     }
   }
 }
