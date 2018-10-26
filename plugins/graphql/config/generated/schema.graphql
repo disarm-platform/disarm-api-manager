@@ -1,0 +1,644 @@
+type Algo {
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String
+  description: String
+  releases(sort: String, limit: Int, start: Int, where: JSON): [Releases]
+}
+
+type AlgoAggregator {
+  count: Int
+}
+
+type AlgoConnection {
+  values: [Algo]
+  groupBy: AlgoGroupBy
+  aggregate: AlgoAggregator
+}
+
+type AlgoConnection_id {
+  key: ID
+  connection: AlgoConnection
+}
+
+type AlgoConnectionCreatedAt {
+  key: DateTime
+  connection: AlgoConnection
+}
+
+type AlgoConnectionDescription {
+  key: String
+  connection: AlgoConnection
+}
+
+type AlgoConnectionName {
+  key: String
+  connection: AlgoConnection
+}
+
+type AlgoConnectionUpdatedAt {
+  key: DateTime
+  connection: AlgoConnection
+}
+
+type AlgoGroupBy {
+  _id: [AlgoConnection_id]
+  createdAt: [AlgoConnectionCreatedAt]
+  updatedAt: [AlgoConnectionUpdatedAt]
+  name: [AlgoConnectionName]
+  description: [AlgoConnectionDescription]
+}
+
+input AlgoInput {
+  name: String
+  releases: [ID]
+  description: String
+}
+
+input createAlgoInput {
+  data: AlgoInput
+}
+
+type createAlgoPayload {
+  algo: Algo
+}
+
+input createReleasesInput {
+  data: ReleasesInput
+}
+
+type createReleasesPayload {
+  release: Releases
+}
+
+input createRoleInput {
+  data: RoleInput
+}
+
+type createRolePayload {
+  role: UsersPermissionsRole
+}
+
+input createRunInput {
+  data: RunInput
+}
+
+type createRunPayload {
+  run: Run
+}
+
+input createUserInput {
+  data: UserInput
+}
+
+type createUserPayload {
+  user: UsersPermissionsUser
+}
+
+"""
+The `DateTime` scalar represents a date and time following the ISO 8601 standard
+"""
+scalar DateTime
+
+input deleteAlgoInput {
+  where: InputID
+}
+
+type deleteAlgoPayload {
+  algo: Algo
+}
+
+input deleteReleasesInput {
+  where: InputID
+}
+
+type deleteReleasesPayload {
+  release: Releases
+}
+
+input deleteRoleInput {
+  where: InputID
+}
+
+type deleteRolePayload {
+  role: UsersPermissionsRole
+}
+
+input deleteRunInput {
+  where: InputID
+}
+
+type deleteRunPayload {
+  run: Run
+}
+
+input deleteUserInput {
+  where: InputID
+}
+
+type deleteUserPayload {
+  user: UsersPermissionsUser
+}
+
+enum ENUM_RUN_RUN_STATUS {
+  start
+  success
+  fail
+}
+
+input FileInput {
+  name: String!
+  hash: String!
+  sha256: String
+  ext: String
+  mime: String!
+  size: String!
+  url: String!
+  provider: String!
+  related: [ID]
+}
+
+input InputID {
+  id: ID!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+union Morph = Algo | createAlgoPayload | updateAlgoPayload | deleteAlgoPayload | AlgoConnection | AlgoAggregator | AlgoGroupBy | AlgoConnection_id | AlgoConnectionCreatedAt | AlgoConnectionUpdatedAt | AlgoConnectionName | AlgoConnectionDescription | Releases | createReleasesPayload | updateReleasesPayload | deleteReleasesPayload | ReleasesConnection | ReleasesAggregator | ReleasesGroupBy | ReleasesConnection_id | ReleasesConnectionCreatedAt | ReleasesConnectionUpdatedAt | ReleasesConnectionVersion | ReleasesConnectionContainer_link | ReleasesConnectionDocs_link | ReleasesConnectionPublished | ReleasesConnectionAlgo | Run | createRunPayload | updateRunPayload | deleteRunPayload | RunConnection | RunAggregator | RunGroupBy | RunConnection_id | RunConnectionCreatedAt | RunConnectionUpdatedAt | RunConnectionRun_status | RunConnectionUser | RunConnectionReleases | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
+
+type Mutation {
+  createAlgo(input: createAlgoInput): createAlgoPayload
+  updateAlgo(input: updateAlgoInput): updateAlgoPayload
+  deleteAlgo(input: deleteAlgoInput): deleteAlgoPayload
+  createReleases(input: createReleasesInput): createReleasesPayload
+  updateReleases(input: updateReleasesInput): updateReleasesPayload
+  deleteReleases(input: deleteReleasesInput): deleteReleasesPayload
+  createRun(input: createRunInput): createRunPayload
+  updateRun(input: updateRunInput): updateRunPayload
+  deleteRun(input: deleteRunInput): deleteRunPayload
+
+  """Create a new role"""
+  createRole(input: createRoleInput): createRolePayload
+
+  """Update an existing role"""
+  updateRole(input: updateRoleInput): updateRolePayload
+
+  """Delete an existing role"""
+  deleteRole(input: deleteRoleInput): deleteRolePayload
+  createUser(input: createUserInput): createUserPayload
+  updateUser(input: updateUserInput): updateUserPayload
+  deleteUser(input: deleteUserInput): deleteUserPayload
+  upload(refId: ID, ref: String, source: String, file: Upload!): UploadFile!
+}
+
+type Query {
+  algo(id: ID!): Algo
+  algos(sort: String, limit: Int, start: Int, where: JSON): [Algo]
+  algosConnection(sort: String, limit: Int, start: Int, where: JSON): AlgoConnection
+  release(id: ID!): Releases
+  releases(sort: String, limit: Int, start: Int, where: JSON): [Releases]
+  releasesConnection(sort: String, limit: Int, start: Int, where: JSON): ReleasesConnection
+  run(id: ID!): Run
+  runs(sort: String, limit: Int, start: Int, where: JSON): [Run]
+  runsConnection(sort: String, limit: Int, start: Int, where: JSON): RunConnection
+  files(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
+  filesConnection(sort: String, limit: Int, start: Int, where: JSON): UploadFileConnection
+  role(id: ID!): UsersPermissionsRole
+
+  """
+  Retrieve all the existing roles. You can't apply filters on this query.
+  """
+  roles(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsRole]
+  rolesConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsRoleConnection
+  user(id: ID!): UsersPermissionsUser
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+  usersConnection(sort: String, limit: Int, start: Int, where: JSON): UsersPermissionsUserConnection
+}
+
+"""Release of an algo, function, model, etc..."""
+type Releases {
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  version: String
+  container_link: String
+  docs_link: String
+  published: Boolean
+  algo: Algo
+  runs(sort: String, limit: Int, start: Int, where: JSON): [Run]
+}
+
+type ReleasesAggregator {
+  count: Int
+}
+
+type ReleasesConnection {
+  values: [Releases]
+  groupBy: ReleasesGroupBy
+  aggregate: ReleasesAggregator
+}
+
+type ReleasesConnection_id {
+  key: ID
+  connection: ReleasesConnection
+}
+
+type ReleasesConnectionAlgo {
+  key: ID
+  connection: ReleasesConnection
+}
+
+type ReleasesConnectionContainer_link {
+  key: String
+  connection: ReleasesConnection
+}
+
+type ReleasesConnectionCreatedAt {
+  key: DateTime
+  connection: ReleasesConnection
+}
+
+type ReleasesConnectionDocs_link {
+  key: String
+  connection: ReleasesConnection
+}
+
+type ReleasesConnectionPublished {
+  key: Boolean
+  connection: ReleasesConnection
+}
+
+type ReleasesConnectionUpdatedAt {
+  key: DateTime
+  connection: ReleasesConnection
+}
+
+type ReleasesConnectionVersion {
+  key: String
+  connection: ReleasesConnection
+}
+
+type ReleasesGroupBy {
+  _id: [ReleasesConnection_id]
+  createdAt: [ReleasesConnectionCreatedAt]
+  updatedAt: [ReleasesConnectionUpdatedAt]
+  version: [ReleasesConnectionVersion]
+  container_link: [ReleasesConnectionContainer_link]
+  docs_link: [ReleasesConnectionDocs_link]
+  published: [ReleasesConnectionPublished]
+  algo: [ReleasesConnectionAlgo]
+}
+
+input ReleasesInput {
+  version: String
+  container_link: String
+  docs_link: String
+  published: Boolean
+  algo: ID
+  runs: [ID]
+}
+
+input RoleInput {
+  name: String!
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+}
+
+type Run {
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  run_status: ENUM_RUN_RUN_STATUS
+  user: UsersPermissionsUser
+  releases: Releases
+}
+
+type RunAggregator {
+  count: Int
+}
+
+type RunConnection {
+  values: [Run]
+  groupBy: RunGroupBy
+  aggregate: RunAggregator
+}
+
+type RunConnection_id {
+  key: ID
+  connection: RunConnection
+}
+
+type RunConnectionCreatedAt {
+  key: DateTime
+  connection: RunConnection
+}
+
+type RunConnectionReleases {
+  key: ID
+  connection: RunConnection
+}
+
+type RunConnectionRun_status {
+  key: String
+  connection: RunConnection
+}
+
+type RunConnectionUpdatedAt {
+  key: DateTime
+  connection: RunConnection
+}
+
+type RunConnectionUser {
+  key: ID
+  connection: RunConnection
+}
+
+type RunGroupBy {
+  _id: [RunConnection_id]
+  createdAt: [RunConnectionCreatedAt]
+  updatedAt: [RunConnectionUpdatedAt]
+  run_status: [RunConnectionRun_status]
+  user: [RunConnectionUser]
+  releases: [RunConnectionReleases]
+}
+
+input RunInput {
+  run_status: ENUM_RUN_RUN_STATUS
+  user: ID
+  releases: ID
+}
+
+input updateAlgoInput {
+  where: InputID
+  data: AlgoInput
+}
+
+type updateAlgoPayload {
+  algo: Algo
+}
+
+input updateReleasesInput {
+  where: InputID
+  data: ReleasesInput
+}
+
+type updateReleasesPayload {
+  release: Releases
+}
+
+input updateRoleInput {
+  where: InputID
+  data: RoleInput
+}
+
+type updateRolePayload {
+  role: UsersPermissionsRole
+}
+
+input updateRunInput {
+  where: InputID
+  data: RunInput
+}
+
+type updateRunPayload {
+  run: Run
+}
+
+input updateUserInput {
+  where: InputID
+  data: UserInput
+}
+
+type updateUserPayload {
+  user: UsersPermissionsUser
+}
+
+"""
+The `Upload` scalar type represents a file upload promise that resolves an
+object containing `stream`, `filename`, `mimetype` and `encoding`.
+"""
+scalar Upload
+
+type UploadFile {
+  _id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  hash: String!
+  sha256: String
+  ext: String
+  mime: String!
+  size: String!
+  url: String!
+  provider: String!
+  related(sort: String, limit: Int, start: Int, where: JSON): [Morph]
+}
+
+type UploadFileAggregator {
+  count: Int
+}
+
+type UploadFileConnection {
+  values: [UploadFile]
+  groupBy: UploadFileGroupBy
+  aggregate: UploadFileAggregator
+}
+
+type UploadFileConnection_id {
+  key: ID
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionCreatedAt {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionExt {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionHash {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionMime {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionName {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionProvider {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionSha256 {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionSize {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUpdatedAt {
+  key: DateTime
+  connection: UploadFileConnection
+}
+
+type UploadFileConnectionUrl {
+  key: String
+  connection: UploadFileConnection
+}
+
+type UploadFileGroupBy {
+  _id: [UploadFileConnection_id]
+  createdAt: [UploadFileConnectionCreatedAt]
+  updatedAt: [UploadFileConnectionUpdatedAt]
+  name: [UploadFileConnectionName]
+  hash: [UploadFileConnectionHash]
+  sha256: [UploadFileConnectionSha256]
+  ext: [UploadFileConnectionExt]
+  mime: [UploadFileConnectionMime]
+  size: [UploadFileConnectionSize]
+  url: [UploadFileConnectionUrl]
+  provider: [UploadFileConnectionProvider]
+}
+
+input UserInput {
+  username: String!
+  email: String!
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+  runs: [ID]
+}
+
+type UsersPermissionsPermission {
+  _id: ID!
+  type: String!
+  controller: String!
+  action: String!
+  enabled: Boolean!
+  policy: String
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsRole {
+  _id: ID!
+  name: String!
+  description: String
+  type: String
+  permissions(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsPermission]
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+}
+
+type UsersPermissionsRoleAggregator {
+  count: Int
+}
+
+type UsersPermissionsRoleConnection {
+  values: [UsersPermissionsRole]
+  groupBy: UsersPermissionsRoleGroupBy
+  aggregate: UsersPermissionsRoleAggregator
+}
+
+type UsersPermissionsRoleConnection_id {
+  key: ID
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionDescription {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionName {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleConnectionType {
+  key: String
+  connection: UsersPermissionsRoleConnection
+}
+
+type UsersPermissionsRoleGroupBy {
+  _id: [UsersPermissionsRoleConnection_id]
+  name: [UsersPermissionsRoleConnectionName]
+  description: [UsersPermissionsRoleConnectionDescription]
+  type: [UsersPermissionsRoleConnectionType]
+}
+
+type UsersPermissionsUser {
+  _id: ID!
+  username: String!
+  email: String!
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsRole
+  runs(sort: String, limit: Int, start: Int, where: JSON): [Run]
+}
+
+type UsersPermissionsUserAggregator {
+  count: Int
+}
+
+type UsersPermissionsUserConnection {
+  values: [UsersPermissionsUser]
+  groupBy: UsersPermissionsUserGroupBy
+  aggregate: UsersPermissionsUserAggregator
+}
+
+type UsersPermissionsUserConnection_id {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionBlocked {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionConfirmed {
+  key: Boolean
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionEmail {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionRole {
+  key: ID
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserConnectionUsername {
+  key: String
+  connection: UsersPermissionsUserConnection
+}
+
+type UsersPermissionsUserGroupBy {
+  _id: [UsersPermissionsUserConnection_id]
+  username: [UsersPermissionsUserConnectionUsername]
+  email: [UsersPermissionsUserConnectionEmail]
+  confirmed: [UsersPermissionsUserConnectionConfirmed]
+  blocked: [UsersPermissionsUserConnectionBlocked]
+  role: [UsersPermissionsUserConnectionRole]
+}
