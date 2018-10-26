@@ -168,7 +168,7 @@ The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://
 """
 scalar JSON
 
-union Morph = Algo | createAlgoPayload | updateAlgoPayload | deleteAlgoPayload | AlgoConnection | AlgoAggregator | AlgoGroupBy | AlgoConnection_id | AlgoConnectionCreatedAt | AlgoConnectionUpdatedAt | AlgoConnectionName | AlgoConnectionDescription | Releases | createReleasesPayload | updateReleasesPayload | deleteReleasesPayload | ReleasesConnection | ReleasesAggregator | ReleasesGroupBy | ReleasesConnection_id | ReleasesConnectionCreatedAt | ReleasesConnectionUpdatedAt | ReleasesConnectionVersion | ReleasesConnectionContainer_link | ReleasesConnectionDocs_link | ReleasesConnectionPublished | ReleasesConnectionAlgo | Run | createRunPayload | updateRunPayload | deleteRunPayload | RunConnection | RunAggregator | RunGroupBy | RunConnection_id | RunConnectionCreatedAt | RunConnectionUpdatedAt | RunConnectionRun_status | RunConnectionUser | RunConnectionReleases | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
+union Morph = Algo | createAlgoPayload | updateAlgoPayload | deleteAlgoPayload | AlgoConnection | AlgoAggregator | AlgoGroupBy | AlgoConnection_id | AlgoConnectionCreatedAt | AlgoConnectionUpdatedAt | AlgoConnectionName | AlgoConnectionDescription | Releases | createReleasesPayload | updateReleasesPayload | deleteReleasesPayload | ReleasesConnection | ReleasesAggregator | ReleasesGroupBy | ReleasesConnection_id | ReleasesConnectionCreatedAt | ReleasesConnectionUpdatedAt | ReleasesConnectionContainer_link | ReleasesConnectionVersion | ReleasesConnectionDocs_link | ReleasesConnectionPublished | ReleasesConnectionAlgo | Run | createRunPayload | updateRunPayload | deleteRunPayload | RunConnection | RunAggregator | RunGroupBy | RunConnection_id | RunConnectionCreatedAt | RunConnectionUpdatedAt | RunConnectionRun_status | RunConnectionUser | RunConnectionReleases | UploadFile | UploadFileConnection | UploadFileAggregator | UploadFileGroupBy | UploadFileConnection_id | UploadFileConnectionCreatedAt | UploadFileConnectionUpdatedAt | UploadFileConnectionName | UploadFileConnectionHash | UploadFileConnectionSha256 | UploadFileConnectionExt | UploadFileConnectionMime | UploadFileConnectionSize | UploadFileConnectionUrl | UploadFileConnectionProvider | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsRoleConnection | UsersPermissionsRoleAggregator | UsersPermissionsRoleGroupBy | UsersPermissionsRoleConnection_id | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionType | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload | UsersPermissionsUserConnection | UsersPermissionsUserAggregator | UsersPermissionsUserGroupBy | UsersPermissionsUserConnection_id | UsersPermissionsUserConnectionUsername | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionRole
 
 type Mutation {
   createAlgo(input: createAlgoInput): createAlgoPayload
@@ -224,8 +224,8 @@ type Releases {
   _id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  version: String
   container_link: String
+  version: String
   docs_link: String
   published: Boolean
   algo: Algo
@@ -286,16 +286,16 @@ type ReleasesGroupBy {
   _id: [ReleasesConnection_id]
   createdAt: [ReleasesConnectionCreatedAt]
   updatedAt: [ReleasesConnectionUpdatedAt]
-  version: [ReleasesConnectionVersion]
   container_link: [ReleasesConnectionContainer_link]
+  version: [ReleasesConnectionVersion]
   docs_link: [ReleasesConnectionDocs_link]
   published: [ReleasesConnectionPublished]
   algo: [ReleasesConnectionAlgo]
 }
 
 input ReleasesInput {
-  version: String
   container_link: String
+  version: String
   docs_link: String
   published: Boolean
   algo: ID

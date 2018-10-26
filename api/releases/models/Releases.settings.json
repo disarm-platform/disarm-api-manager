@@ -9,11 +9,11 @@
     "timestamps": true
   },
   "attributes": {
-    "version": {
+    "container_link": {
       "default": "",
       "type": "string"
     },
-    "container_link": {
+    "version": {
       "default": "",
       "type": "string"
     },
