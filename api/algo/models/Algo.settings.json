@@ -1,6 +1,6 @@
 {
   "connection": "default",
-  "collectionName": "",
+  "collectionName": "algo",
   "info": {
     "name": "algo",
     "description": ""
@@ -15,8 +15,11 @@
     },
     "releases": {
       "collection": "releases",
-      "via": "algo",
-      "columnName": ""
+      "via": "algo"
+    },
+    "description": {
+      "default": "",
+      "type": "text"
     }
   }
 }
